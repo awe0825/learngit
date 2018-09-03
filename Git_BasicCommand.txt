@@ -1,0 +1,101 @@
+git SSH key的生成：
+使用git bash生成key，命令：ssh-keygen
+
+添加key到GitHub
+关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git
+e.g. git remote add origin git@github:awe0825/learngit.git
+
+git 基本命令：(git提交流程：工作区 <-> 暂存区 <-> 本地仓库 <-> 远程仓库)
+
+git add
+$git add <file> 【添加文件到暂存区】
+$git add <path> 【添加文件夹下所有文件到暂存区】
+$git add. 【当前目录下所有新增、修改的文件添加到暂存区，不包含删除的文件】
+$git add -u 【把当前目录下所有删除、修改的文件添加到暂存区，不包括新增的文件】
+$git add -A 【把当前目录下所有删除、新增、修改的文件添加到暂存区】
+----------------
+git commit
+$git commit -m "information"
+$git commit 【弹出vi窗口，输入信息后退出】
+$git commit -a -m "infomation" 【直接提交到本地仓库】
+$git commit --amend 【保持ChangeId不变提交】
+----------------
+git status
+$git status
+untracked file 【工作区文件，处于未跟踪状态】
+changes to be commited 【已跟踪但未提交，处于暂存区】
+changes not staged for commit 【已跟踪的内容文件发生了变化】
+----------------
+git reset
+$git reset HEAD^ 【回退所有内容到上一个版本，改动部分放到工作区】
+$git reset HEAD <file> 【取消暂存<file>文件，改动部分放到工作区】
+$git reset HEAD^ <file> 【回退文件到上一个版本，改动部分放到工作区】
+$git reset --soft HEAD^ 【回退所有内容到上一个版本，改动部分放到暂存区】
+$git reset --hard HEAD^ 【回退所有内容到上一个版本，改动部分删除】
+$git reset --hard HEAD~1 【撤销最近一次commit，回退到上一个版本】
+$git reset --hard HEAD~10 【撤销最近十次commit，回退到上一个版本】
+$git reset --hard HEAD <commit_id> 【回退到版本commit_id】
+----------------
+git diff
+$git diff 【工作区与暂存区比较】
+$git diff --staged(cached) 【查看已暂存的内容】
+$git diff HEAD 【工作区和HEAD的比较】
+$git diff <commit_id1> <commit_id2> 【commit_id1和commit_id2版本的差异】
+$git diff <commit_id1>:<file> <commit_id2>:<file> 【commit_id1和commit_id2版本<file>的差异】
+----------------
+git log
+$git log 【查看提交历史】
+$git log -p -2 【查看最近两次提交的log】
+$git log <file> 【显示<file>的log】
+$git log --stat 【显示提交历史的统计信息】
+$git log --author=A 【显示A作者的提交】
+$git reflog 【查看提交历史，包括已删除的commit的记录】
+----------------
+git branch
+$git branch -a 【显示所有分支】
+$git branch <branch> 【新建本地分支branch，但不切换到该分支】
+$git checkout <branch> 【切换到本地分支branch】
+$git checkout origin/<branch> 【切换到远程分支branch】
+$git checkout -b <branch> 【新建本地分支branch并切换到该分支】
+$git checkout -b <branch> origin/<branch> 【新建本地分支并追踪远程分支】
+$git push origin/<branch> 【把本地分支提交到远程】
+$git merge origin/master 【把master分支merge到当前所在的分支】
+$git branch -d <branch> 【删除分支branch】
+$git branch -D <branch> 【强制删除分支branch】
+$git branch --merged 【查看那些分支已经合并到了当前分支】
+$git branch --no--merged 【查看所有包含的未合并工作的分支】
+$git branch -v 【列出所有分支的最后一次提交】
+$git branch -av 【列出所有远程及本地分支以及追踪关系】
+$git branch -vv 【列出所有本地分支及其远程追踪分支】
+----------------
+git push
+$git push origin HEAD:refs/for/<branch> 将当前分支推送到远程<branch>分支并需要审核
+$git push origin HEAD:<branch> 将当前分支推送到远程<branch>分支，无需审核
+$git push origin test:master 将本地test分支推送到远程master分支上。
+----------------
+git rm
+$git rm 【从工作区以及暂存区删除】
+$git rm <file> 【从工作区以及暂存区删除file文件】
+----------------
+git pull
+$git pull origin <branch> 【拉取远程仓库更新并与本地进行合并】
+$git pull origin <branch>:master 【拉取远程仓库的<branch>分支，并与本地master分支合并】
+----------------
+git stash
+       含义参考廖雪峰官网的Bug分支，
+$git stash list 【查看隐藏的工作现场】
+$git stash drop 【删除最新一条stash列表内容】
+$git stash apply 【恢复工作现场，但不删除stash列表内容】
+$git stash pop 【恢复工作现场的同时删除stash列表内容】
+----------------
+git tag
+$git tag 【显示所有的tag】
+$git checkout <tag> 【提取tag对应的代码】 
+$git tag -a V1.4 【打tag V1.4】
+$git show <tag> 【显示指定的tag】
+$git push origin <tag> 【推送tag到远程仓库】
+$git push origin --tags 【一次性推送所有的tag】
+ 
+回退到某个日期的版本
+git checkout `git rev-list --all -n1 --before="2018-03-01"`
+如果是repo的话，则使用repo forall -c 'git checkout `git rev-list --all -n1 --before="2018-03-01"`'
