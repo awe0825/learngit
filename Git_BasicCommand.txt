@@ -1,10 +1,18 @@
 git SSH key的生成：
 使用git bash生成key，命令：ssh-keygen
-
-添加key到GitHub
-关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git
+----------------
+设置 git用户名邮箱：
+git config --global user.name "****"
+git config --global user.email "email@example.com"
+----------------
+可添加SSH key到GitHub，Gerrit等的设置中
+关联一个远程库，使用命令
+git remote add origin git@server-name:path/repo-name.git
 e.g. git remote add origin git@github:awe0825/learngit.git
-
+----------------
+确认是否添加key正确：
+ssh -p 端口号 username@服务器地址
+----------------
 git 基本命令：(git提交流程：工作区 <-> 暂存区 <-> 本地仓库 <-> 远程仓库)
 
 git add
