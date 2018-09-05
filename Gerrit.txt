@@ -1,0 +1,43 @@
+﻿Gerrit的作用：
+代码审核，权限管理，创建工程
+
+重点，查看/添加/删除用户(用户名需具有唯一性)：
+cd /opt/gerrit/
+cat passwd
+sudo htpasswd -bm passwd username password
+sudo htpasswd -D passwd username
+若需要修改用户密码，需删除该用户再创建。
+
+配置查看：
+cd /etc/ngix/conf.d
+cat gerrit.conf
+包括端口号，服务器名称，基本用户信息存放路径等信息。
+
+创建仓库（Create new project）：
+添加工程名，权限继承（选择一个已存在的工程）
+
+建立分支(Branches):
+Branch Name,添加分支名称
+Initial Revision，添加对应的SHA-1->每一次提交的Commit ID（代表一个版本）
+****
+//SHA-1: Secure Hash Algorithm 1，安全散列算法1
+//生成的散列值，通常呈现形式为40个十六进制数
+****
+
+权限仓库：
+为了管理项目仓库权限而建立（Only serve as parent for other projects）。
+
+权限设置：
+Label Code-Review设置可审核代码的人；
+Submit 设置可提交代码的人；
+……
+
+组别管理：
+原生组：
+Adminnistrator -->Gerrit Site Adminnistrators
+Non-Interactive User
+创建Group：组名，添加/删除Member, Included Groups
+
+git-repo仓库
+
+manifest仓库是repo仓库，用来管理项目代码，里面对应不同项目的xml文件
