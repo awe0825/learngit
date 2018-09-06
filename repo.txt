@@ -60,12 +60,7 @@ repo init -u ssh://username@服务器：端口号/manifest -b BranchName -m xmlF
 
 ====将本地代码仓库上传提交至另一远程服务器上====
 创建工程
-repo forall -c 'ssh -p 端口号 username@服务器 gerrit create-project $REPO_PROJECT --empty-commit --description $REPO_PROJECT'
-在gerrit上创建分支
-
-
-
-
-
-
-repo forall -c "git push origin 本地分支名:geely"
+repo forall -c 'ssh -p 端口号 username@服务器 gerrit create-project $REPO_PROJECT --empty-commit(会创建一个master的分支，一次空提交) --description $REPO_PROJECT'
+repo forall -c 'git push ssh://username@服务器:端口号/$REPO_PROJECT 本地分支名:远程服务器的需创建分支名'
+//repo forall -c "git push origin 本地分支名:远程服务器的需创建分支名"
+创建manifest仓库并提交
