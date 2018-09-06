@@ -1,19 +1,21 @@
-####====repo xml文件====
+#####repo xml文件
 Android使用repo来管理多个git项目。它需要一个manifest XML文件来指示这些git项目的属性。
-
+*****
 在本地服务器创建一个manifest的文件夹
 通过git clone到该文件夹中
-
 *****
+
 EXAMPLE:
+(```)
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 	<remote fetch="ssh://git.example.com"(从哪里去下载代码) name="test" review="gerrit.example.com"（Gerrit/Git服务器的地址）/>
 	<defaut remote="test"(需要和remote中的name一致) revision="master" syn-j="1"/>
 	<project path="project/name" name="name" revision="branches"/>
 </manifest>
+(```)
 
-#####xml文件包括下面的元素：
+######xml文件包括下面的元素：
 **remote标签**
 	name：在每一个.git/config文件的remote项中用到这个name，即表示每个git的远程服务器的名字(这个名字很关键，如果多个remote属性的话，default属性中需要指定default remote)。git pull、get fetch的时候会用到这个remote name。
 	alias ：可以覆盖之前定义的remote name，name必须是固定的，但是alias可以不同，可以用来指向不同的remote url
@@ -38,7 +40,7 @@ EXAMPLE:
 	upstream ：在哪个git分支可以找到一个SHA1。用于同步revision锁定的manifest(-c 模式)。该模式可以避免同步整个ref空间
 	annotation ：可以有0个或多个annotation，格式是name-value，repo forall命令是会用来定义环境变量
 	
-####====本地repo init，代码仓库的初始化====
+#####本地repo init，代码仓库的初始化
 创建一个文件夹并进入
 repo init -u ssh://username@服务器：端口号/manifest -b BranchName -m xmlFile进行代码仓库的初始化
 执行repo sync（-c -j16） 进行代码同步
@@ -58,7 +60,7 @@ repo init -u ssh://username@服务器：端口号/manifest -b BranchName -m xmlF
   # repo forall -c git git reset —hard 提交ID(或最原始:HEAD)
   # repo forall -r framework/base/core -c git reset —hard 提交ID(或最原始HEAD)
 
-####====将本地代码仓库上传提交至另一远程服务器上====
+#####将本地代码仓库上传提交至另一远程服务器上
 创建工程
 repo forall -c 'ssh -p 端口号 username@服务器 gerrit create-project $REPO_PROJECT --empty-commit(会创建一个master的分支，一次空提交) --description $REPO_PROJECT'
 repo forall -c 'git push ssh://username@服务器:端口号/$REPO_PROJECT 本地分支名:远程服务器的需创建分支名'
