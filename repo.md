@@ -1,4 +1,4 @@
-#####repo xml文件
+##### repo xml文件
 
 Android使用repo来管理多个git项目。它需要一个manifest XML文件来指示这些git项目的属性。
 
@@ -18,7 +18,7 @@ EXAMPLE:
 </manifest>
 ```
 
-######xml文件包括下面的元素：
+###### xml文件包括下面的元素：
 
 **remote标签**
 
@@ -63,7 +63,7 @@ EXAMPLE:
     
 	annotation ：可以有0个或多个annotation，格式是name-value，repo forall命令是会用来定义环境变量
 	
-#####本地repo init，代码仓库的初始化
+##### 本地repo init，代码仓库的初始化
 
 创建一个文件夹并进入
 
@@ -95,7 +95,7 @@ repo init -u ssh://username@服务器：端口号/manifest -b BranchName -m xmlF
   repo forall -r framework/base/core -c git reset —hard 提交ID(或最原始HEAD)
   >丢弃分支
 
-#####将本地代码仓库上传提交至另一远程服务器上
+##### 将本地代码仓库上传提交至另一远程服务器上
 
 创建工程
 
